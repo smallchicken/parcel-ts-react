@@ -1,18 +1,22 @@
-import 'babel-polyfill';
 import React from 'react'
 
 import {
-  Route,
+  BrowserRouter, 
   Switch
 } from 'react-router-dom'
+
 import routes from './router'
+import { FrontendAuth } from './components/frontend-auth'
+import { message } from 'antd'
+
+message.config({
+  maxCount: 1,
+});
 
 export default () => (
-  <Switch>
-    {
-      routes.map(({ name, path, exact = true, component }) => (
-        <Route path={path} exact={exact} component={component} key={name} />
-      ))
-    }
-  </Switch>
+  <BrowserRouter>
+      <Switch>
+        <FrontendAuth config={routes} />
+      </Switch>
+  </BrowserRouter>
 )
